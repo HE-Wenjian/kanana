@@ -38,8 +38,6 @@ TESTING
 To make sure katana works:
 make check
 
-Note that at present this only tests the hotpatching features of katana
-
 USAGE
   Katana presently has two main functions
   HOTPATCHING
@@ -51,5 +49,6 @@ USAGE
     katana -p PATCH_FILE PID
 
   ELF/DWARF Manipulation
-    Documentation has not yet been written. Email
-    electron100@gmail.com if you are interested in this.
+    See the shell commands at http://katana.nongnu.org/doc/katana.html#sec-2.1        
+    Further documentation has not yet been written. Email
+    electron100@gmail.com if you are interested in seeing this expanded
