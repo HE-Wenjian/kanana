@@ -344,7 +344,7 @@ void buildFDERawData(CallFrameInfo* cfi,FDE* fde,uint* cieOffsets,addr_t* lsdaPo
   {
     if(!cfi->ehAddress)
     {
-      logprintf(ELL_WARN,ELS_DWARF_FRAME,"While writing binary .eh_frame, it appears taht ehAddress is not set. This means that all of the addresses within the FDE will be wrong. Relocations are not yet possible\n");
+      logprintf(ELL_WARN,ELS_DWARF_FRAME,"While writing binary .eh_frame, it appears that ehAddress is not set. This means that all of the addresses within the FDE will be wrong. Relocations are not yet possible\n");
     }
     addr_t pointerLocation=cfi->ehAddress+buf->len+sizeof(header);
     initialLocation=
@@ -361,7 +361,7 @@ void buildFDERawData(CallFrameInfo* cfi,FDE* fde,uint* cieOffsets,addr_t* lsdaPo
   addressRange=fde->highpc-fde->lowpc;
   if(cfi->isEHFrame)
   {
-    //it appears that in .eh_frame this is alwasy 4 although the LSB
+    //it appears that in .eh_frame this is always 4 although the LSB
     //documentation is most unclear on this point
     addressRangeByteLen=4;
   }
