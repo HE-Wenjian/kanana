@@ -568,7 +568,7 @@ Map* readDebugFrame(ElfInfo* elf,bool ehInsteadOfDebug)
     }
     else
     {
-      logprintf(ELL_WARNING,ELS_DWARF_FRAME,"ELF has no .eh_frame_hdr section\n");
+      logprintf(ELL_WARN, ELS_DWARF_FRAME,"ELF has no .eh_frame_hdr section\n");
       elf->callFrameInfo.ehHdrAddress=0;
       elf->callFrameInfo.hdrTableEncoding=0;
       
