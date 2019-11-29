@@ -98,7 +98,7 @@ typedef struct Config
                    //is for each version relative to the source
                    //tree. for patch application, the patch file to load
   int pid;         //for patch application, the process to attach to
-  
+  int recent_elf_bitwidth;
 } Config;
 
 //for global access to the configuration

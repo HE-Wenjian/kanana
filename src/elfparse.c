@@ -64,6 +64,7 @@
 #include "fderead.h"
 #include "symbol.h"
 #include "../config.h"
+#include "katana_config.h"
 
 //the ELF file is always opened read-only. If you want to write a copy
 //to disk, call writeOutElf. 
@@ -90,11 +91,14 @@ ElfInfo* openELFFile(char* fname)
   switch(identBytes[EI_CLASS])
   {
   case ELFCLASS32:
+    e->arch_bitwidth=32;
     #ifdef KATANA_X86_64_ARCH
     logprintf(ELL_WARN,ELS_MISC,"This is a 64-bit version of katana but you are trying to work with a 32-bit ELF file. No testing or attempt to ensure correctness has been made for this case. You will probably do better compiling a 32-bit version of katana. If this feature is important to you, please send email to"PACKAGE_BUGREPORT"\n");
     #endif
     break;
   case ELFCLASS64:
+  e->arch_bitwidth=64;
+  
 #ifdef KATANA_X86_ARCH
     logprintf(ELL_WARN,ELS_MISC,"This is a 32-bit version of katana but you are trying to work with a 64-bit ELF file. No testing or attempt to ensure correctness has been made for this case. You will probably do better compiling a 32-bit version of katana. If this feature is important to you, please send email to"PACKAGE_BUGREPORT"\n");
 #endif
@@ -102,6 +106,7 @@ ElfInfo* openELFFile(char* fname)
   default:
     logprintf(ELL_WARN,ELS_MISC,"Unrecognized ELF class, results may not be what you want");
   }
+  config.recent_elf_bitwidth=e->arch_bitwidth;
   findELFSections(e);
   return e;
 }

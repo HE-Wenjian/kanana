@@ -61,6 +61,7 @@ extern "C"
 #include "shell/dwarfscript/dwarfscript.yy.h"
 #include "elfutil.h"
 #include "eh_pe.h"
+#include "katana_config.h"
   
 extern int yydwdebug;
 extern FILE *yydwin;
@@ -231,6 +232,7 @@ void DwarfscriptCommand::printExceptTableInfo(FILE* file,ElfInfo* elf,ExceptTabl
 void DwarfscriptCommand::emitDwarfscript()
 {
   ElfInfo* elf=elfObjectP->getElfObject();
+  config.recent_elf_bitwidth=elf->arch_bitwidth;
   char* sectionName=sectionNameP->getString();
   if(!sectionName)
   {

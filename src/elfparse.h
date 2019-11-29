@@ -81,6 +81,7 @@ typedef struct ElfInfo
   CallFrameInfo callFrameInfo;
   bool dataAllocatedByKatana;//used for memory management
   bool isPO;//is this elf object a patch object?
+  int arch_bitwidth;
   #ifdef KATANA_X86_64_ARCH
   //set true if text sections use a small code
   //model, requiring any relocations of text, data, rodata, etc

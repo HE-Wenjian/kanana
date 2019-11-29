@@ -61,6 +61,7 @@
 #include "util/util.h"
 #include "leb.h"
 #include "util/logging.h"
+#include "katana_config.h"
 
 //16 possible values in a nibble
 static char* dwpeApplicationTable[16];
@@ -130,7 +131,7 @@ int getPointerSizeFromEHPointerEncoding(byte encoding)
   switch(format)
   {
   case DW_EH_PE_absptr:
-    return sizeof(addr_t);
+    return config.recent_elf_bitwidth? config.recent_elf_bitwidth/8 : sizeof(addr_t);
     break;
   case DW_EH_PE_udata2:
   case DW_EH_PE_sdata2:
@@ -210,8 +211,9 @@ addr_t decodeEHPointer(byte* data,int len,addr_t dataStartAddress,byte encoding,
   switch(format)
   {
   case DW_EH_PE_absptr:
-    memcpy(&result,data,min(len,sizeof(addr_t)));
-    byteSize=sizeof(addr_t);
+    byteSize=config.recent_elf_bitwidth? config.recent_elf_bitwidth/8 : sizeof(addr_t);
+    byteSize=min(len,byteSize);
+    memcpy(&result,data,byteSize);
     break;
   case DW_EH_PE_sdata2:
     resultSigned=true;
